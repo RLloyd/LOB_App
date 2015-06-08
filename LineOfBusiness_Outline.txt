@@ -1,0 +1,7 @@
+AngularJS Line of Business Application
+This excercise is based on the Pluralsight online course by Deborah Kurata
+
+Topics covered that I was really interested:
+- UI_Router
+- $resource
+- $httpBackend
