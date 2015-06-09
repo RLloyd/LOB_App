@@ -1,7 +1,46 @@
 AngularJS Line of Business Application
-This excercise is based on the Pluralsight online course by Deborah Kurata
+This exercise is based on the Pluralsight online course by Deborah Kurata
 
 Topics covered that I was really interested:
 - UI_Router
 - $resource
 - $httpBackend
+
+Exercise breakdown:
+x1:
+- Using ng-init to populate the view template (html) with some json data within the table element
+
+x2:
+Define Angular module method:
+- Setter method needs 2 parameters, name and DI array (of dependencies)
+- ie: angular.module("moduleName", [DI's]);
+- Getter method: angular.module("moduleName");
+- THE IIFE JS Pattern: Immediately-Invoked Function Expression. (function(){...}()); aka: Self-executing anonymous function
+	• IIFE is a function expression and not a function declaration.
+
+Add Controller Function by registration:
+- Start with the IIFE
+- Look up the module
+- Registering the controller with the module
+	• angular.module("gdApp").controller("ProductListCtrl", function ProductListCtrl(DIs){...);
+- Write the code for the controller
+
+The use of "Controller As" :: simplified $scope handling
+- $scope is not required as a parameter
+- Model and methods are defined on the controller itself
+- Reference using an alias
+- $scope still exists behind the scenes
+
+Added bootstrap.css to beautify the view.
+- class = "panel panel-primary"...
+
+The working project gets populated from the ProductListController.
+Images can be shown and hide using ng-if and not ng-show.
+ng-if only fetch the image data when called.
+
+x3:
+Define another module called common.services
+- Add the ff as DIs:
+	- ngResource
+	- ProductResourceService
+

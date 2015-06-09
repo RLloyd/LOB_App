@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app = "gdApp">
+<head lang = "en">
+  <meta charset = "UTF-8">
+  <title>GonzalesDesign: LOB App</title>
+  <meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href = "http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Open+Sans:400,300|Raleway|Cinzel"
+        rel = "stylesheet" type = "text/css">
+  <link href = 'http://fonts.googleapis.com/css?family=Source+Sans+Pro|Droid+Sans|Ubuntu|Raleway|Montserrat'
+        rel = 'stylesheet' type = 'text/css'>
+  <link rel = "stylesheet" href = "css/basicStyles.css"/>
+</head>
+
+<body>
+
+<div class = "container">
+  <div class = "panel panel-primary">
+    <div class = "panel-heading tH1">
+      Products List
+    </div>
+    <!-- Products Template -->
+    <table class = "table table-striped table-hover"
+           ng-controller = "ProductListCtrl as vm">
+      <thead>
+      <tr class = "success tH1">
+        <td>
+          <button type = "button" class = "btn btn-primary"
+                  ng-click = "vm.toggleImage()">
+            {{vm.showImage ? "Hide " : "Show "}}Image
+          </button>
+        </td>
+        <td>Product</td>
+        <td>Code</td>
+        <td>Available</td>
+        <td>Price</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat = "product in vm.products">
+        <td>
+          <!--ng-show still fetch image so use ng-if instead-->
+          <img ng-if = "vm.showImage"
+               ng-src = "{{product.imageUrl}}"
+               style = "width:250px; margin:0px;"
+               title = "{{product.productName}}"/>
+        </td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.releaseDate}}</td>
+        <td>{{product.price | currency}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!----------| LIBRARY SCRIPTS |---------->
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-route.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-resource.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-mocks.js"></script>
+<script src = "js/angular-ui-router.min.js"></script>
+
+<!----------| APPLICATION SCRIPT |---------->
+<script src = "app/app.js"></script>
+
+<!----------| PRODUCT CONTROLLER SCRIPT |---------->
+<script src = "app/products/productListCtrl.js"></script>
+
+</body>
+
+</html>
