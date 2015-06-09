@@ -34,13 +34,29 @@ The use of "Controller As" :: simplified $scope handling
 Added bootstrap.css to beautify the view.
 - class = "panel panel-primary"...
 
-The working project gets populated from the ProductListController.
+The working project gets populated from the "ProductListController".
 Images can be shown and hide using ng-if and not ng-show.
 ng-if only fetch the image data when called.
 
 x3:
-Define another module called common.services
+Add services
+Define another module called "common.services"
 - Add the ff as DIs:
 	- ngResource
 	- ProductResourceService
+- "common.services" will be injected in "app" module
+- "common.services" module will also be called "productResource" module
+	to create a new factory/services module
+- Take the data out from "productListCtrl"
 
+Add $httpBackend to simulate REST api service.
+$httpBackend intercepts the request and fake the web service for a responds
+Mocks the calls to the Web Service
+Returns static data to the application
+Two implementations:
+- ngMock: for unit testing apps
+- ngMockE2E: for End-to-end testing or backend-less development (we use this)
+
+x4:
+Add Editing and Saving capabilities
+- 

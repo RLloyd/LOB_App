@@ -1,24 +1,22 @@
 /**
- * Created by Odee on 6/8/15.
+ * Created by Odee on 6/9/15.
  */
+
+/*x3: productResourceMock
+* Add this file as DI in "app" module
+* THIS IS FOR MOCKING DATA FOR DEVELOPMENT
+* */
+
+/*Data is still hard-coded here but this app is Web Service ready.
+When connecting to a web service just remove this as DI in "app" module*/
 
 (function () { //IIFE
 	'use strict';
 
-	angular.module("gdApp").controller("ProductListCtrl", ["productResource", ProductListCtrl]);
+	var app = angular.module("productResourceMock", ["ngMockE2E"]);
 
-	function ProductListCtrl(productResource){ //Add "productResource" as DI and pass it as a parameter to get the data.
-		var vmj = this;
-
-		productResource.query(function(data){
-			vmj.products = data;
-		};
-		/*productResource.query(prodFunct);
-		function prodFunct(data){
-		 vmj.products = data;
-		}*/
-
-		/*vmj.products = [
+	app.run(function ($httpBackend) {
+		var products = [
 			{
 				"productId": 1,
 				"productName": "Lingerie Skimpy",
@@ -55,12 +53,14 @@
 				"tags": ["leaf", "tool"],
 				"imageUrl": "images/sexyPinay_03.jpg"
 			}
-		];*/
+		];
 
-		vmj.showImage = false;
-		vmj.toggleImage = function(){
-			vmj.showImage = !vmj.showImage;
-		}
-	}
+		//Url that expected to intercept. This Url was issued in "productResource" service
+		var productUrl = "/api/products"
+
+		//When "productUrl" is intercepted response with the "products" data instead
+		$httpBackend.whenGET(productUrl).respond(products);
+
+	})
 	
 }());
