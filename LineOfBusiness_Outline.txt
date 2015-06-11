@@ -1,5 +1,6 @@
 AngularJS Line of Business Application
 This exercise is based on the Pluralsight online course by Deborah Kurata
+This are some of the notes working on the different versions of the project.
 
 Topics covered that I was really interested:
 - UI_Router
@@ -11,7 +12,7 @@ x1:
 - Using ng-init to populate the view template (html) with some json data within the table element
 
 x2:
-Define Angular module method:
+Defined Angular module method:
 - Setter method needs 2 parameters, name and DI array (of dependencies)
 - ie: angular.module("moduleName", [DI's]);
 - Getter method: angular.module("moduleName");
@@ -21,7 +22,7 @@ Define Angular module method:
 Add Controller Function by registration:
 - Start with the IIFE
 - Look up the module
-- Registering the controller with the module
+- Registering the controller with the module:
 	• angular.module("gdApp").controller("ProductListCtrl", function ProductListCtrl(DIs){...);
 - Write the code for the controller
 
@@ -39,15 +40,15 @@ Images can be shown and hide using ng-if and not ng-show.
 ng-if only fetch the image data when called.
 
 x3:
-Add services
-Define another module called "common.services"
-- Add the ff as DIs:
+Added services
+Defined another module called "common.services"
+- Added the ff as DIs:
 	- ngResource
 	- ProductResourceService
-- "common.services" will be injected in "app" module
-- "common.services" module will also be called "productResource" module
-	to create a new factory/services module
-- Take the data out from "productListCtrl"
+- "common.services" gets injected in "app" module
+- "common.services" module is also called in "productResource" module
+	for creating a new factory/services module
+- Took the data out from "productListCtrl"
 
 Add $httpBackend to simulate REST api service.
 $httpBackend intercepts the request and fake the web service for a responds
@@ -58,5 +59,28 @@ Two implementations:
 - ngMockE2E: for End-to-end testing or backend-less development (we use this)
 
 x4:
+SPA: Single Page Application
+
 Add Editing and Saving capabilities
-- 
+-
+
+Add routing using ui-router not ngRouter
+- ui-router uses states
+
+
+Site Map:
+Menu:
+	- Welcome Page = state: home
+	- Product List = state: productList
+		- Product Details = state: productDetail
+		-- Product Edit (accessible from main menu as well) = state: productEdit
+
+Add ui-router.js in index.html script tag
+Add ui-router as DI in "app" module, setup .config...
+Setup the view template in "index.html", use ui-sref="state name"
+
+x5:
+Implementing Product Details
+
+
+
