@@ -24,8 +24,22 @@
                 url: "/products/edit/: productId",
                 templateUrl: "app/products/productEditView.html",
                 controller: "ProductEditCtrl as vm"
+            })
+                .state("productDetail", {
+                url: "/products/:productId",
+                templateUrl: "app/products/productDetailView.html",
+                controller: "ProductDetailCtrl as vm",
+                //---Adding resolve: prodResource is the key name, value: "productResource" is a string alias of the service
+                resolve: {
+                    prodResource: "productResource",
+                    product: function (prodResource, $stateParams) {
+                        var prodId = $stateParams.productId;
+                        return prodResource.get({ productId: prodId }).$promise;
+                    }
+                }
             });
-            $urlRouterProvider.otherwise("/"); /*default*/
+            $urlRouterProvider.otherwise("/");
+            /*default*/
         }]);
 }());
 //# sourceMappingURL=app.js.map

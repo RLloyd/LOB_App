@@ -30,10 +30,21 @@
              style = "width:250px; margin:0px;"
              title = "{{product.productName}}"/>
       </td>
-      <td>{{product.productName}}</td>
+      <td><a ui-sref="productDetail({productId: product.productId})">
+             {{product.productName}}</a>
+      </td>
       <td>{{product.productCode}}</td>
       <td>{{product.releaseDate}}</td>
       <td>{{product.price | currency}}</td>
+      <td>Things</td>
+      <!--Edit Button-->
+      <td>
+        <a ui-sref = "productEdit({productId: product.productId})"
+           class = "btn btn=primary">
+          Edit
+        </a>
+      </td>
+
     </tr>
     </tbody>
   </table>

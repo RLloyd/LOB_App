@@ -54,6 +54,7 @@
 				"imageUrl": "images/sexyPinay_03.jpg"
 			}
 		];
+		console.log("products: ", products.productName:2);
 
 		//Url that expected to intercept. This Url was issued in "productResource" service
 		var productUrl = "/api/products";

@@ -80,7 +80,39 @@ Add ui-router as DI in "app" module, setup .config...
 Setup the view template in "index.html", use ui-sref="state name"
 
 x5:
-Implementing Product Details
+Define nested routing states for a wizard
+Implementing Product Details:
+	- Creating New State:
+		- Build the View Template: New html file "productDetailView.html"
+		- Create the Controller: "productDetailCtrl.js"
+		- Configure the State: Add the new state in "app" module
+		- Activate the State: Use ui-sref="linkHere"
 
+Using "resolve" to preload data. It's added to the "app" module.
+
+Resolve Example: 05_03 @ 02:30
+	.state("productDetail", {
+		url: "/products/:productId",
+		templateUrl: "app/products/productDetailView.html",
+		controller: "ProductDetailCtrl as vm",
+		//---Adding resolve: prodResource is the key name, value: "productResource" is a string alias of the service
+		resolve:{
+			prodResource: "productResource",
+			product: function(prodResource, $stateParams){
+				var prodId = $stateParams.productId;
+				return prodResource.get({productId: prodId}).$promise
+			}
+		}
+	});
+Resolve is a property of the state configuration object. It's define as object literal with key/value pairs.
+	- The "prodResource" KEY: defines a dependency on the VALUE: "productResource" service.
+	The productResource is the service that supplies the data to the application.
+	- The second key/value pairs with a function as value that returns a "$promise".
+	This function depends on "prodResource" for data and
+	"$stateParams" that's part of ui-router and it's needed to obtain the correct productId of the product.
+	"return" defines the "get" method of the associated resource,
+	passing the object with an id to retrieve, the function then returns the associated "$promise"
+
+	- You can add any numbers of key/value pairs in resolve.
 
 
