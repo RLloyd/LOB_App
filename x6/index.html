@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app = "gdApp">
+<head lang = "en">
+  <meta charset = "UTF-8">
+  <title>GonzalesDesign: LOB App</title>
+  <meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href = "http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Open+Sans:400,300|Raleway|Cinzel"
+        rel = "stylesheet" type = "text/css">
+  <link href = 'http://fonts.googleapis.com/css?family=Source+Sans+Pro|Droid+Sans|Ubuntu|Raleway|Montserrat'
+        rel = 'stylesheet' type = 'text/css'>
+  <link rel = "stylesheet" href = "css/basicStyles.css"/>
+</head>
+
+<body>
+<!--Navigation-->
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <a ui-sref="home" class = "navbar-brand">Acme Product Management</a>
+      <div class="navbar-header">
+        <button type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+                data-target = ".navbar-collapse">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a ui-sref="productList">Product List</a></li>
+          <li><a ui-sref="productEdit({productId:0})"><i class="glyphicon glyphicon-plus"></i>Add Product Detail</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!--Partial Views -->
+<div class = "container">
+  <div ui-view></div>
+</div>
+<!----------| LIBRARY SCRIPTS |---------->
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
+<!--<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-route.min.js"></script>-->
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-resource.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-mocks.js"></script>
+<script src = "js/angular-ui-router.min.js"></script>
+<!--ui-router: Third party library. github.com/angular-ui/ui-router-->
+
+<!----------| APPLICATION SCRIPT |---------->
+<script src = "app/app.js"></script>
+
+<!----------| SERVICES SCRIPTS |---------->
+<script src = "common/services/common.services.js"></script>
+<script src = "common/services/productResource.js"></script>
+<script src = "common/services/productResourceMock.js"></script>
+
+<!----------| PRODUCT CONTROLLER SCRIPT |---------->
+<script src = "app/products/productListCtrl.js"></script>
+<script src = "app/products/productDetailCtrl.js"></script>
+
+</body>
+
+</html>

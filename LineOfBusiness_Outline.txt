@@ -115,4 +115,6 @@ Resolve is a property of the state configuration object. It's define as object l
 
 	- You can add any numbers of key/value pairs in resolve.
 
+x6:
+Nested Views
 
