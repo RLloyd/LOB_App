@@ -50,6 +50,17 @@ Defined another module called "common.services"
 	for creating a new factory/services module
 - Took the data out from "productListCtrl"
 
+Using the Resource Object: 03_05
+	function productResource($resource){
+		return $resource("/api/products/: productId")
+	};
+	Uses 5 Methods:
+	- Get
+	- Query
+	- Save
+	- Delete: (JS reserved word)
+	- Remove
+
 Add $httpBackend to simulate REST api service.
 $httpBackend intercepts the request and fake the web service for a responds
 Mocks the calls to the Web Service
@@ -116,5 +127,24 @@ Resolve is a property of the state configuration object. It's define as object l
 	- You can add any numbers of key/value pairs in resolve.
 
 x6:
-Nested Views
+Nested Views or States
+Product Edit: (multiple nested views/states)
+	- Basic Info: productEdit.info
+	- Price Details: productEdit.price
+	- Search Tags: productEdit.tags
+
+Steps for adding nested states:
+	- In "app" module, .state("productEdit")... add the nested views
+
+x6b:
+Creating a Form
+
+
+
+
+
+
+
+
+
 

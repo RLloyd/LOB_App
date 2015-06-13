@@ -28,11 +28,55 @@
 						controller: "ProductListCtrl as vm"
 					})
 
+					/*-----| PRODUCT EDIT |-----*/
+					///////////////////05_05:Defining Abstract States
+					/*.state("productEdit", {
+					 abstract: true,
+					 url: "/products/edit/: productId",
+					 templateUrl: "app/products/productEditView.html",
+					 controller: "ProductEditCtrl as vm",
+					 //---Add resolve on the parent and the nested views will inherit
+					 resolve:{
+					 prodResource: "productResource",
+					 product: function(prodResource, $stateParams){
+					 var productId = $stateParams.productId;
+					 console.log("prodResource: ",prodResource);
+					 console.log("productId: ",productId);
+					 return productResource.get({ productId: productId }).$promise;
+					 }
+					 }
+					 })*/
 					.state("productEdit", {
-						url: "/products/edit/: productId",
+						abstract: true, ///////////////////05_05:Defining Abstract States
+						url: "/products/edit/:productId",
 						templateUrl: "app/products/productEditView.html",
-						controller: "ProductEditCtrl as vm"
+						controller: "ProductEditCtrl as vm",
+						resolve: {
+							productResource: "productResource",
+							product: function (productResource, $stateParams) {
+								var productId = $stateParams.productId;
+								console.log("prodResource: ", productResource);
+								console.log("productId: ", productId);
+								return productResource.get({productId: productId}).$promise;
+							}
+						}
 					})
+
+					/*Product Edit Nested States  05_04: Nested Routing States*/
+					.state("productEdit.info", {
+						url: "/info",
+						templateUrl: "app/products/productEditInfoView.html"
+					})
+					.state("productEdit.price", {
+						url: "/price",
+						templateUrl: "app/products/productEditPriceView.html"
+					})
+					.state("productEdit.tags", {
+						url: "/tags",
+						templateUrl: "app/products/productEditTagsView.html"
+					})
+					/*End nested states*/
+					/*-----| END PRODUCT EDIT |-----*/
 
 					//-----| Show product details based on "productId" using "resolve" object
 					.state("productDetail", {
@@ -40,11 +84,13 @@
 						templateUrl: "app/products/productDetailView.html",
 						controller: "ProductDetailCtrl as vm",
 						//---Adding resolve: prodResource is the key name, value: "productResource" is a string alias of the service
-						resolve:{
-							prodResource: "productResource",
-							product: function(prodResource, $stateParams){
-								var prodId = $stateParams.productId;
-								return prodResource.get({productId: prodId}).$promise
+						resolve: {
+							productResource: "productResource",
+							product: function (productResource, $stateParams) {
+								var productId = $stateParams.productId;
+								console.log("prodResource: ", productResource);
+								console.log("productId: ", productId);
+								return productResource.get({productId: productId}).$promise;
 							}
 						}
 					});

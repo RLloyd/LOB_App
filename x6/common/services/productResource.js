@@ -10,6 +10,8 @@
     angular.module("common.services", ["ngResource"])*/
     angular.module("common.services").factory("productResource", ["$resource", productResource]);
     function productResource($resource) {
+        console.log("$resource: ", $resource);
+        console.log("$resource(/api/products/:productId): ", ($resource("/api/products/:productId")));
         return $resource("/api/products/:productId");
     }
 }());

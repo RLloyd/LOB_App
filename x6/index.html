@@ -9,6 +9,7 @@
         rel = "stylesheet" type = "text/css">
   <link href = 'http://fonts.googleapis.com/css?family=Source+Sans+Pro|Droid+Sans|Ubuntu|Raleway|Montserrat'
         rel = 'stylesheet' type = 'text/css'>
+  <link rel = "stylesheet" href = "css/app.css"/>
   <link rel = "stylesheet" href = "css/basicStyles.css"/>
 </head>
 
@@ -31,7 +32,11 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a ui-sref="productList">Product List</a></li>
-          <li><a ui-sref="productEdit({productId:0})"><i class="glyphicon glyphicon-plus"></i>Add Product Detail</a></li>
+          <li>
+            <!--<a ui-sref="productEdit({productId:0})">-->
+            <a ui-sref="productEdit.info({productId:0})">
+            <i class="glyphicon glyphicon-plus"></i>Add Product Detail</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -44,10 +49,19 @@
 <!----------| LIBRARY SCRIPTS |---------->
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<!--Angular 1.4.0-rc.2-->
 <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
 <!--<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-route.min.js"></script>-->
 <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-resource.min.js"></script>
 <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-mocks.js"></script>
+
+<!--&lt;!&ndash;Angular 1.4.16&ndash;&gt;
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-route.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-resource.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-mocks.js"></script>-->
+
 <script src = "js/angular-ui-router.min.js"></script>
 <!--ui-router: Third party library. github.com/angular-ui/ui-router-->
 
@@ -62,6 +76,7 @@
 <!----------| PRODUCT CONTROLLER SCRIPT |---------->
 <script src = "app/products/productListCtrl.js"></script>
 <script src = "app/products/productDetailCtrl.js"></script>
+<script src = "app/products/productEditCtrl.js"></script>
 
 </body>
 

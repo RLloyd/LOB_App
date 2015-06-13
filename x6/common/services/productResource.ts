@@ -15,7 +15,13 @@
 	angular.module("common.services").factory("productResource", ["$resource", productResource]);
 
 	function productResource ($resource){
-		return $resource("/api/products/:productId")
+		console.log("$resource: ",$resource);
+		console.log("$resource(/api/products/:productId): ",($resource("/api/products/:productId")));
+
+		return $resource(
+			"/api/products/:productId"
+			/*{ 'query': { method: 'GET'}}*/
+		)
 	}
 
 }());

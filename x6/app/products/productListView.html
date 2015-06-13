@@ -37,9 +37,11 @@
       <td>{{product.releaseDate}}</td>
       <td>{{product.price | currency}}</td>
       <td>Things</td>
+
       <!--Edit Button-->
       <td>
-        <a ui-sref = "productEdit({productId: product.productId})"
+        <!--<a ui-sref = "productEdit({productId: product.productId})"-->
+        <a ui-sref = "productEdit.info({productId: product.productId})"
            class = "btn btn=primary">
           Edit
         </a>
