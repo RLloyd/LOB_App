@@ -1,4 +1,4 @@
-AngularJS Line of Business Application
+AngularJS Line of Business Applications
 This exercise is based on the Pluralsight online course by Deborah Kurata
 This are some of the notes working on the different versions of the project.
 
@@ -7,7 +7,36 @@ Topics covered that I was really interested:
 - $resource
 - $httpBackend
 
+//------------------------------------//
+Angular Line of Business Applications:
+Business Requirements:
+	- Application Features
+	- Design Considerations
+	- Architecture
+
+Layout and Navigation:
+	- Page Layout(view)
+	- Style(bootstrap)
+	- Navigation (routing)
+
+Data Access:
+	- Retrieving data
+	- Saving data
+
+Data Entry Forms:
+	- Form layout
+	- Validation
+	- Submittal
+
+Business Logic:
+	- Services
+
+Data Visualization:
+	- Charts
+//------------------------------------//
+
 Exercise breakdown:
+
 x1:
 - Using ng-init to populate the view template (html) with some json data within the table element
 
@@ -137,14 +166,214 @@ Steps for adding nested states:
 	- In "app" module, .state("productEdit")... add the nested views
 
 x6b:
-Creating a Form
+Creating a Form with Angular and styling with bootstrap. productEditInfoView.html
+
+{{One way data binding expression}}
+ng-model="Allows two way data binding"
+
+Mask Edit: download from " http://angular-ui.github.io/ui-utils/ "
+Insert "ui-utils.min.js" in index.html
+Add "ui.mask" as a dependency in "app" module
+
+Date Picker:
+...
+type = "text"
+<!--type is text and not date so the browser won't attempt to handle the date-->
+...
+
+Search Tags Form:
+-productEditCtrl.js
+
+Add toastr from "https://github.com/CodeSeven/toastr"
+	- toastr is a Javascript library for non-blocking notifications.
+	jQuery is required. The goal is to create a simple core library
+	that can be customized and extended.
+	- "Save Successful"
+
+Summary x6b:
+	- Create a Data Entry Form
+	- Bind the UI Elemnts to the Model
+	- Style the Form with Bootstrap
+	- Use the Mask Edit Directive
+	- Use the Date Picker Directive
+	- Submit the Form
+
+x7:
+Client data validation of data entry form.
+
+Angular Validating Forms Techniques:
+	- Type Attribute • type="email"
+	- Required Attribute • required
+	- Angular Validation Attributes • ng-minlength, ng-maxlength, ng-pattern
+	- Custom Angular Directive • my-directive FOR COMPLEX PROJECTS
+	- Code in the Controller • if{}... NOT RECOMMENDED!
+
+Objectives:
+	- Prepare the Form:
+		<form...> element is actually Angular directive
+		Important to name form
+		add "novalidate" tag to turn off browser's validation
+
+	- Identify Required Fields
+		<input class="form-control"
+			id="inputProductName"
+			type="text"
+			placeholder="Product Name"
+			ng-model="vm.product.productName"
+			required />
+
+	- Mark Invalid Elements: Relies on 3 features
+		ngClass Directive
+		Bootstrap Styles
+		Angular Validation States
+		ie:
+		ng-class="{'has-error':
+			productForm.inputProductName.$invalid}"
+
+		Using Angular Validation States
+			Form must have a name
+			 Input element must have a name
+			 Input element must include ng-model
+
+	- Display Messages
+		Options:
+		Alert Box (Bad Design)
+		Validation Message Area (put next to the input field using "span")
+
+	- Use Angular Validation Attributes
+		ng-minlength, ng-maxlength,  ng-pattern
+
+		<input class="form-control"
+        			id="inputProductName"
+        			type="text"
+        			placeholder="Product Name"
+        			ng-model="vm.product.productName"
+        			required
+        			ng-minlength="4"
+        			ng-maxlength="12" />
+
+        Showing Different Messages for Different Errors:
+            ngMessages directive: Similar to Switch statement
+
+            //The ff is only available for Angular 1.3 and up
+            <span class="help-block has-error"> //bootsrap css js
+                <span ng-messages = "productForm.pn.$error">
+                    <span ng-message="required">Required</span>
+                    <span ng-message="minlength">Min of 4 chars</span>
+                    <span ng-message="maxlength">Max of 12 chars</span>
+                </span>
+            </span>
+
+            //For older version
+            <span class="help-block has-error">
+                <span ng-show="productForm.inputProductName.$error.required">
+                Product Name is Required.
+                </span>
+                <span ng-show="productForm.inputProductName.$error.minlength">
+                Must be at least 4 characters in length.
+                </span>
+                <span ng-show="productForm.inputProductName.$error.maxlength">
+                Cannot exceed 12 characters in length.
+                </span>
+                ...
+            </span>
+
+	- Prevent Submit
+		If the form has error, you shouldn't be able to save the data.
+
+		Disable the Save button:
+		<button class = "btn btn-primary"
+				style = "width: 90px; margin-right: 0px"
+				ng-click = "vm.submit()"
+				ng-disabled = "productForm.$invalid">
+				Save
+		</button>
+
+		Display a message:
+		//ng-click="vm.submit(productForm.$valid)"
+		//At the html view
+		<button class = "btn btn-primary"
+                style = "width: 90px; margin-right: 0px"
+                ng-click = "vm.submit(productForm.$invalid)">
+                Save
+        </button>
+
+        //Do the same with "productEditTagsView.html" submit function
+
+        //Make some changes in the "productEditCtrl.js"
+        vm.submit = function (isValid){
+            if(isValid){
+                vm.product.$save(function(data){
+                    toastr.success("Save Successfully");
+                })
+            } else {
+                alert("Please correct the validation errors first.");
+            }
+
+        }
 
 
+x8:
+Business Logic
+	Use Cases:
+	- Order can't be place of out of stock
+	- Computing profit margin on each product
+	- etc.
+	- Re-usable throughout the application
+
+Module Objectives:
+- Build an Angular Service for Business Logic
+- Use that service
+- Re-use that service
+
+Angular Services:
+Angular code that can be used to:
+	- Organize application logic
+	- Encapsulate logic not directly related to a view or model
+	- share logic (data) across the application
+Services can be:
+	- Injected into any controller or other service
+	- Making it easily to use
+Services are:
+	- Lazily instantiated: only gets instantiated when a component depends on it
+	- Singletons:
 
 
+Factory Method:
+Register the Service:
+	- Name
+	- Factory function
+ie:
+	angular.module("common.services").factory("productService", productService); //name and function
+	function productService(){
+	...
+	};
 
+Steps for Creating a Custom Service:
+Create a new javascript file
+	Insert a script tag into index.html
+		Register the Service with a Module
+			Write the Service Factory Function
 
+Using a Custom Angular Service:
+	- Inject the service
+		- Call the service
+	function productDetailCtrl(product, productService){ //Inject it
+		productService.calculateMarginPercent(price, cost); //Call it
+	}
 
+x9:
+Visualization: Data with Charts
+For Analyzing Profit Margin
+
+Module Objectives:
+	- Download the charting component
+		- Angular-Charts: D3 lite version.
+		- http://chinmaymk.github.io/angular-charts
+	- Define a new route state
+	- Define a new menu option
+	- Build the view
+	- Build the controller
 
 
 
