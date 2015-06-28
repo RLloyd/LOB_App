@@ -8,10 +8,10 @@
 	console.log("productEditCtrl.ts");
 	/*Register controller to the main module*/
 
-		/*The old way*/
-		/*angular.module("gdApp")
-			.controller("ProductEditCtrl", ["product", "$state", "productService", ProductEditCtrl]);*/
-			//.directive("updateDirective", updateDirective);
+	/*The old way*/
+	/*angular.module("gdApp")
+	 .controller("ProductEditCtrl", ["product", "$state", "productService", ProductEditCtrl]);*/
+	//.directive("updateDirective", updateDirective);
 
 	/*Recommended*/
 	angular
@@ -54,7 +54,6 @@
 		vm.open = function ($event) {
 			$event.preventDefault();
 			$event.stopPropagation();
-
 			vm.opened = !vm.opened;
 		};
 
@@ -64,27 +63,25 @@
 		 };*/
 
 		/*vm.populated = false;
-		console.log("populated: ", vm.populated);*/
+		 console.log("populated: ", vm.populated);*/
 
 		//vm.inputProductName = "";
 
 		/*vm.mayLaman = function(){
-			console.log("vm.product.productName: ", vm.product.productName);
-			console.log("inputProductName: ", vm.inputProductName);
-			//vm.populated = false;
-			console.log("populated: ", vm.populated);
-			if(vm.product.productName){
-				vm.populated = true;
-				console.log("mayLaman() : vm.populated", vm.populated);
-				//vm.popMe = true;
-			} else {
-				//vm.popMe = false;
-				vm.populated = false;
-				console.log("mayLaman() : vm.populated", vm.populated);
-			}
-		};*/
-
-
+		 console.log("vm.product.productName: ", vm.product.productName);
+		 console.log("inputProductName: ", vm.inputProductName);
+		 //vm.populated = false;
+		 console.log("populated: ", vm.populated);
+		 if(vm.product.productName){
+		 vm.populated = true;
+		 console.log("mayLaman() : vm.populated", vm.populated);
+		 //vm.popMe = true;
+		 } else {
+		 //vm.popMe = false;
+		 vm.populated = false;
+		 console.log("mayLaman() : vm.populated", vm.populated);
+		 }
+		 };*/
 
 		//console.log("submit(): vm.product.productName: ", vm.product.productName);
 		//console.log("vm.inputProductName1: ",vm.inputProductName);
@@ -101,23 +98,23 @@
 			//console.log("submit(): vm.product.productName: ", vm.product.productName);
 			//console.log("submit(): prod: ", prod);
 			/*if(vm.product.productName){
-				//console.log("submit() : vm.product.productName populated")
-				//vm.popMe = true;
-			}*/
+			 //console.log("submit() : vm.product.productName populated")
+			 //vm.popMe = true;
+			 }*/
 			if (isValid) {
 				vm.product.$save(function (data) {
 					toastr.success("Save Successful");
 
-										//vm.mayLaman();
+					//vm.mayLaman();
 
-										//console.log("submit(): prod: ", prod);
-										//console.log("vm.inputProductName2: ",vm.inputProductName);
+					//console.log("submit(): prod: ", prod);
+					//console.log("vm.inputProductName2: ",vm.inputProductName);
 
-										//$state.go("productList");
-										//vm.populated = true;
-										/*vm.mayLaman();
-										vm.popMe = true;
-										console.log("populated: ", vm.populated);*/
+					//$state.go("productList");
+					//vm.populated = true;
+					/*vm.mayLaman();
+					 vm.popMe = true;
+					 console.log("populated: ", vm.populated);*/
 				})
 			} else {
 				//console.log("vm.product: ", vm.product)
@@ -126,7 +123,7 @@
 		};
 
 		vm.submitPrice = function (isValid) {
-			if(vm.product.productName) {
+			if (vm.product.productName) {
 				if (isValid) {
 					vm.product.$save(function (data) {
 						toastr.success("Save Successful");
@@ -137,11 +134,11 @@
 				}
 			} else {
 				//alert("Please fill out the Basic Information first");
-				vm.basicInfoWarning = "Please fill out the Basic Information first";
+				vm.infoWarning = "Please fill out the Basic Information first";
 			}
 		};
 
-
+		//var tagPresent;
 		vm.submitTag = function (isValid) {
 			//console.log("populated1: ", vm.populated);
 			//if (vm.populated) {
@@ -154,37 +151,52 @@
 			console.log("vm.product.productId: ", vm.product.productId);
 			console.log("vm.inputProductName: ", vm.inputProductName);
 			//if (vm.popModel === "populated") {
-			if(vm.product.productId){ //To make sure the Basic Info is populated
-				if (isValid) {
-					vm.product.$save(function (data) {
-						toastr.success("Save Successful");
-						//$state.go("productList");
-						//console.log("populated2: ", vm.populated);
-						vm.infoWarning = "Saved";
-						vm.turnGreen();
-					})
+
+			console.log("vm.product.tags: ", vm.product.tags);
+			if (vm.product.productId) { //To make sure the Basic Info is populated
+				if (vm.product.tags) {
+					if (isValid) {
+						vm.product.$save(function (data) {
+							toastr.success("Save Successful");
+							//$state.go("productList");
+							//console.log("populated2: ", vm.populated);
+							vm.infoWarning = "Saved";
+							vm.changeColor("green");
+						})
+					} else {
+						//console.log("vm.product: ", vm.product)
+						//alert("Please correct the validation error first");
+						vm.infoWarning = "Info Warning: Product Name and Code are Required.";
+						vm.changeColor("red");
+					}
 				} else {
-					//console.log("vm.product: ", vm.product)
-					alert("Please correct the validation error first");
+					vm.infoWarning = "Info Warning: Please add a tag to save.";
+					vm.changeColor("red");
 				}
 			} else {
 				//alert("Please fill out the Basic Information first");
-				vm.basicInfoWarning = "Please fill out the Basic Information first";
+				//vm.basicInfoWarning = "Please fill out the Basic Information first";
 				vm.infoWarning = "Info Warning: Product Name and Code are Required.";
+				vm.changeColor("red");
 				//infoWarningGreen(vm.basicInfoWarning);
+				/*var col=document.getElementById(vm.infoWarning);
+				 console.log("col: ", col);*/
 			}
 			//}
 		};
 
 		vm.customStyle = {};
-		vm.changeColor = function (elem, color){
-			elem
-			vm.customStyle.style = {"color":"green"};
-		}
+		vm.changeColor = function (kulay) {
+			//elem.fontcolor(kulay);
+			vm.customStyle.style = {"color": kulay};
+			/*var col=document.getElementById(elem);
+			 console.log("col: ", col);*/
+			//col.style.color=kulay;
+		};
 
-		var infoWarningGreen = function(elem){
+		var infoWarningGreen = function (elem) {
 			var infoId = document.getElementById(elem)
-			console.log("infoId:",infoId);
+			console.log("infoId:", infoId);
 			//document.getElementById(vm.infoWarning).style.color = color;
 		}
 
@@ -196,16 +208,19 @@
 		//Search tags
 		vm.addTags = function (tags) {
 			//if (vm.populated) {
-				if (tags) {
-					var array = tags.split(',');
-					vm.product.tags = vm.product.tags ? vm.product.tags.concat(array) : array;
-					vm.newTags = "";
-				} else {
-					alert("Please enter one or more tags separated by commas");
-				}
+			console.log("vm.product.tags: ", vm.product.tags);
+			if (tags) {
+				/*tagPresent = true;
+				 console.log("tagPresent: ",tagPresent);*/
+				var array = tags.split(',');
+				vm.product.tags = vm.product.tags ? vm.product.tags.concat(array) : array;
+				vm.newTags = "";
+			} else {
+				alert("Please enter one or more tags separated by commas");
+			}
 			/*} else {
-				console.log("Not populated")
-			}*/
+			 console.log("Not populated")
+			 }*/
 		};
 
 		vm.removeTag = function (idx) {

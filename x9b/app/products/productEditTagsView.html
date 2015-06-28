@@ -23,7 +23,8 @@
                 <button type = "button"
                         class = "btn btn-default"
                         title = "Add the specified tags"
-                        ng-click = "vm.addTags(vm.newTags)">
+                        ng-click = "vm.addTags(vm.newTags)"
+                        required>
                     Add
                 </button>
 
@@ -66,7 +67,8 @@
                     </button>
                   </span>
                  <span class = "help-block has-error">
-                    <span ng-show = "vm.basicInfoWarning" ng-style="customStyle.style">{{vm.infoWarning}}</span>
+                    <span ng-show = "vm.infoWarning" ng-style="vm.customStyle.style">{{vm.infoWarning}}</span>
+                     <!--it works without ng-show as well-->
                  </span>
                 </div>
             </div>
