@@ -7,8 +7,9 @@ ng-model="Allows two way data binding"
   <fieldset>
     <legend>Basic Product Information</legend>
 
-    <!--Form group: Name Input Field-->
+    <!--Form group: Name Input Field--------------------------------->
     <div class = "form-group"
+         ng-model="vm.popModel"
          ng-class = "{'has-error':productForm.inputProductName.$invalid &&
                                 productForm.inputProductName.$dirty}">
       <label class = "col-md-2 control-label"
@@ -36,12 +37,14 @@ ng-model="Allows two way data binding"
             <span ng-message = "maxlength">Max of 12 chars</span>
         </span>
       </span>-->
-      <span class = "help-block has-eror">
+      <span class = "help-block has-error">
         <span ng-show = "productForm.inputProductName.$error.required">Product Name is Required.</span>
         <span ng-show = "productForm.inputProductName.$error.minlength">Must be at least 4 characters in length.</span>
         <span ng-show = "productForm.inputProductName.$error.maxlength">Cannot exceed 20 characters in length.</span>
       </span>
     </div>
+    <!--End Form group: Name Input Field--------------------------------->
+
 
     <!--Form group: Code Input Field-->
     <div class = "form-group"
@@ -76,6 +79,7 @@ ng-model="Allows two way data binding"
       </span>-->
     </div>
 
+    <!--Form group: Date Input Field-->
     <div class = "form-group">
       <label class = "col-md-2 control-label"
              for = "inputAvailabilityDate">Availability</label>
@@ -98,6 +102,7 @@ ng-model="Allows two way data binding"
       </div>
     </div>
 
+    <!--Form group: Description Input Field-->
     <div class = "form-group">
       <label class = "col-md-2 control-label"
              for = "inputDescription">Description</label>
@@ -117,7 +122,7 @@ ng-model="Allows two way data binding"
         <span>
           <button class = "btn btn-primary"
                   style = "width: 90px; margin-right: 0px"
-                  ng-click = "vm.submit(productForm.$valid, vm.populated)"
+                  ng-click = "vm.submit(productForm.$valid)"
                   ng-disabled = "productForm.$invalid">
             Save
           </button>

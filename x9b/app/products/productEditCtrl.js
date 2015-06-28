@@ -3,8 +3,17 @@
  */
 (function () {
     'use strict';
+    console.log("productEditCtrl.ts");
     /*Register controller to the main module*/
-    angular.module("gdApp").controller("ProductEditCtrl", ["product", "$state", "productService", ProductEditCtrl]);
+    /*The old way*/
+    /*angular.module("gdApp")
+        .controller("ProductEditCtrl", ["product", "$state", "productService", ProductEditCtrl]);*/
+    //.directive("updateDirective", updateDirective);
+    /*Recommended*/
+    angular
+        .module("gdApp")
+        .controller("ProductEditCtrl", ProductEditCtrl);
+    ProductEditCtrl.$inject = ["product", "$state", "productService"];
     function ProductEditCtrl(product, $state, productService) {
         var vm = this;
         vm.product = product;
@@ -41,18 +50,46 @@
         /*vm.submit = function(){
          vm.product.$save();
          };*/
-        vm.populated = false;
-        console.log("populated: ", vm.populated);
-        vm.mayLaman = function () {
-            vm.populated = true;
+        /*vm.populated = false;
+        console.log("populated: ", vm.populated);*/
+        //vm.inputProductName = "";
+        /*vm.mayLaman = function(){
+            console.log("vm.product.productName: ", vm.product.productName);
+            console.log("inputProductName: ", vm.inputProductName);
+            //vm.populated = false;
             console.log("populated: ", vm.populated);
-        };
-        vm.popMe = false;
+            if(vm.product.productName){
+                vm.populated = true;
+                console.log("mayLaman() : vm.populated", vm.populated);
+                //vm.popMe = true;
+            } else {
+                //vm.popMe = false;
+                vm.populated = false;
+                console.log("mayLaman() : vm.populated", vm.populated);
+            }
+        };*/
+        //console.log("submit(): vm.product.productName: ", vm.product.productName);
+        //console.log("vm.inputProductName1: ",vm.inputProductName);
+        //console.log("vm.inputSearchTags: ",vm.inputSearchTags);
+        //var prod = "";
+        //vm.popModel = false;
+        /*vm.popModel = "notPopulated";*/
         vm.submit = function (isValid) {
             //vm.populated = true;
+            /*vm.popModel = "populated";*/
+            //prod = vm.product.productName;
+            //console.log("submit(): vm.product.productName: ", vm.product.productName);
+            //console.log("submit(): prod: ", prod);
+            /*if(vm.product.productName){
+                //console.log("submit() : vm.product.productName populated")
+                //vm.popMe = true;
+            }*/
             if (isValid) {
                 vm.product.$save(function (data) {
                     toastr.success("Save Successful");
+                    //vm.mayLaman();
+                    //console.log("submit(): prod: ", prod);
+                    //console.log("vm.inputProductName2: ",vm.inputProductName);
                     //$state.go("productList");
                     //vm.populated = true;
                     /*vm.mayLaman();
@@ -65,21 +102,65 @@
                 alert("Please correct the validation error first");
             }
         };
+        vm.submitPrice = function (isValid) {
+            if (vm.product.productName) {
+                if (isValid) {
+                    vm.product.$save(function (data) {
+                        toastr.success("Save Successful");
+                    });
+                }
+                else {
+                    //console.log("vm.product: ", vm.product)
+                    alert("Please correct the validation error first");
+                }
+            }
+            else {
+                //alert("Please fill out the Basic Information first");
+                vm.basicInfoWarning = "Please fill out the Basic Information first";
+            }
+        };
         vm.submitTag = function (isValid) {
             //console.log("populated1: ", vm.populated);
             //if (vm.populated) {
-            if (isValid) {
-                vm.product.$save(function (data) {
-                    toastr.success("Save Successful");
-                    //$state.go("productList");
-                    //console.log("populated2: ", vm.populated);
-                });
+            //console.log("vm.inputProductName2b: ", vm.inputProductName);
+            //console.log("submitTag() : vm.product.productName populated")
+            //console.log("submit(): vm.popModel: ", vm.popModel);
+            /*console.log("vm.popModel: ", vm.popModel);*/
+            console.log("vm.product.productName: ", vm.product.productName);
+            console.log("vm.product.productId: ", vm.product.productId);
+            console.log("vm.inputProductName: ", vm.inputProductName);
+            //if (vm.popModel === "populated") {
+            if (vm.product.productId) {
+                if (isValid) {
+                    vm.product.$save(function (data) {
+                        toastr.success("Save Successful");
+                        //$state.go("productList");
+                        //console.log("populated2: ", vm.populated);
+                        vm.infoWarning = "Saved";
+                        vm.turnGreen();
+                    });
+                }
+                else {
+                    //console.log("vm.product: ", vm.product)
+                    alert("Please correct the validation error first");
+                }
             }
             else {
-                //console.log("vm.product: ", vm.product)
-                alert("Please correct the validation error first");
+                //alert("Please fill out the Basic Information first");
+                vm.basicInfoWarning = "Please fill out the Basic Information first";
+                vm.infoWarning = "Info Warning: Product Name and Code are Required.";
             }
             //}
+        };
+        vm.customStyle = {};
+        vm.changeColor = function (elem, color) {
+            elem;
+            vm.customStyle.style = { "color": "green" };
+        };
+        var infoWarningGreen = function (elem) {
+            var infoId = document.getElementById(elem);
+            console.log("infoId:", infoId);
+            //document.getElementById(vm.infoWarning).style.color = color;
         };
         //For the cancel button: re-direct to a state
         vm.cancel = function () {

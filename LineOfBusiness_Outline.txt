@@ -1,6 +1,6 @@
 AngularJS Line of Business Applications
 This exercise is based on the Pluralsight online course by Deborah Kurata
-This are some of the notes working on the different versions of the project.
+These are some of the notes working on the different versions of the project.
 
 Topics covered that I was really interested:
 - UI_Router
@@ -375,5 +375,19 @@ Module Objectives:
 	- Build the view
 	- Build the controller
 
+x9b:
+On the example exercise, when you add a new product,
+you can accidentally add a new product without the Basic Information by adding a new tags.
 
+The new logic when adding new product:
+	- There are 3 sub-menus when adding new product:
+		- Basic Information
+		- Price Details
+		- Search Tags
+	- Price and Search should be disabled when Basic Info is not populated
+		- Use a trigger to broadcast to the others.
+			- I used the vm.product.productName to check if it's populated or not.
+			- We can also use the vm.product.productId
+			- Each sub-menu forms have their own submit button
+			- The cg-click on each form will be checked if the vm.product.productName is populated
 

@@ -79,12 +79,12 @@
         //-----------| For Saving data
         $httpBackend.whenPOST(productUrl).respond(function (method, url, data) {
             var product = angular.fromJson(data);
-            console.log("produkto: ", product);
+            console.log("productResourceMock.product: ", product);
             if (!product.productId) {
                 //new product id
                 product.productId = products[products.length - 1].productId + 1;
                 var pushMe = products.push(product);
-                console.log("pushMe: ", pushMe);
+                console.log("productResourceMock.pushMe: ", pushMe);
             }
             else {
                 //updated product

@@ -84,6 +84,7 @@
             </div>
         </div>
 
+        <!--Markup Amount Option-->
         <div class = "form-group"
              ng-if = "vm.priceOption=='amount'"
              ng-class = "{'has-error': productPriceForm.inputMarkupAmount.$invalid &&
@@ -104,6 +105,7 @@
                                ng-model = "vm.markupAmount"
                                style = "text-align:right"/>
                     </div>
+
                     <div class = "col-md-2">
                         <button type = "button"
                                 class = "btn btn-default"
@@ -152,7 +154,7 @@
         </div>
 
 
-        <!--Submit and Cancel Buttons-->
+        <!--Submit: Save and Cancel Buttons-->
         <div class = "form-group">
             <div class = "col-md-4 col-md-offset-2">
             <span>
@@ -160,10 +162,13 @@
                       style = "width: 80px; margin-right: 10px"
                       type = "submit"
                       ng-disabled = "productPriceForm.$invalid"
-                      ng-click = "vm.submit(productPriceForm.$valid)">
+                      ng-click = "vm.submitPrice(productPriceForm.$valid)">
                   Save
               </button>
             </span>
+                 <span class = "help-block has-error">
+                    <span ng-show = "vm.basicInfoWarning">Product Name and Code are Required.</span>
+                 </span>
             <span>
               <button class = "btn btn-default"
                       style = "width: 70px"
